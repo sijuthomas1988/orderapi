@@ -30,6 +30,9 @@ public class HotelDetails {
     @ApiModelProperty(notes = "hotel number of guests")
     private String hotelNumberOfGuests;
 
+    @ApiModelProperty(notes = "No of Rooms Booked")
+    private Long noOfRooms;
+
     @ApiModelProperty(notes = "hotel room type")
     private RoomType hotelRoomType;
 }

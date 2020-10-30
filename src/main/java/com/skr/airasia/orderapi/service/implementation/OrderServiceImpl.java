@@ -8,8 +8,10 @@ import com.skr.airasia.orderapi.model.TransactionStatus;
 import com.skr.airasia.orderapi.model.OrderErrorCode;
 import com.skr.airasia.orderapi.model.OrderRequest;
 import com.skr.airasia.orderapi.model.OrderResponse;
+import com.skr.airasia.orderapi.optimisticlocking.OptimisticlyLocked;
 import com.skr.airasia.orderapi.repository.HotelInformationRepository;
 import com.skr.airasia.orderapi.repository.OrderRepository;
+import com.skr.airasia.orderapi.service.HotelInformationService;
 import com.skr.airasia.orderapi.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class OrderServiceImpl  implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
-    private HotelInformationRepository hotelInformationRepository;
+    private HotelInformationService hotelInformationService;
 
     @Override
     public OrderResponse insertOrder(OrderRequest orderRequest) throws ServiceException {
@@ -33,10 +35,12 @@ public class OrderServiceImpl  implements OrderService {
         String transactionId = UUID.randomUUID().toString();
         OrderDto orderDto = OrderMapper.convertRequestToDto(orderRequest, transactionId);
         try {
-            HotelDto hotelDto = hotelInformationRepository
+            HotelDto hotelDto = hotelInformationService
                     .findByHotelAndRoomId(orderRequest.getHotelDetails().getHotelRoomId(), orderRequest.getHotelDetails().getHotelId());
             if(hotelDto.getNoOfRoomsAvailable() > 0) {
                 orderRepository.save(orderDto);
+                hotelDto.setNoOfRoomsAvailable(hotelDto.getNoOfRoomsAvailable() - orderRequest.getHotelDetails().getNoOfRooms());
+                hotelInformationService.save(hotelDto);
                 orderResponse.transactionStatus(TransactionStatus.CONFIRMED);
                 orderResponse.orderId(transactionId);
             } else {

@@ -6,11 +6,13 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jms.annotation.EnableJms;
 
 import java.text.NumberFormat;
 import java.util.stream.Stream;
 
 @SpringBootApplication
+@EnableJms
 public class OrderApiApplication {
 
 	public static void main(String[] args) {
@@ -21,10 +23,10 @@ public class OrderApiApplication {
 	ApplicationRunner init(HotelInformationRepository repository) {
 
 		String[][] data = {
-				{"1", "1234_KL_Hilton", "Hilton_KL", "1234_Standard_Hilton_KL", "Standard", "Hilton_KL_Standard", "15"},
-				{"2", "1234_KL_Hilton", "Hilton_KL", "1234_Suite_Hilton_KL", "Suite", "Hilton_KL_Suite", "6"},
-				{"3", "1234_KL_Regis", "Regis_KL", "1234_Suite_Regis_KL", "Suite", "regis_KL_Suite", "0"},
-				{"4", "1234_KL_Regis", "Regis_KL", "1234_Standard_Regis_KL", "Standard", "regis_KL_Standard", "1"}
+				{"1", "1234_KL_Hilton", "Hilton_KL", "1234_Standard_Hilton_KL", "Standard", "Hilton_KL_Standard", "15", "15"},
+				{"2", "1234_KL_Hilton", "Hilton_KL", "1234_Suite_Hilton_KL", "Suite", "Hilton_KL_Suite", "6", "6"},
+				{"3", "1234_KL_Regis", "Regis_KL", "1234_Suite_Regis_KL", "Suite", "regis_KL_Suite", "0", "0"},
+				{"4", "1234_KL_Regis", "Regis_KL", "1234_Standard_Regis_KL", "Standard", "regis_KL_Standard", "1", "1"}
 		};
 
 		return args -> {
@@ -37,7 +39,8 @@ public class OrderApiApplication {
 							array[3],
 							array[4],
 							array[5],
-							Long.valueOf(array[6])
+							Long.valueOf(array[6]),
+							Long.valueOf(array[7])
 					);
 					repository.save(hotelDetails);
 				}

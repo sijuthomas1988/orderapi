@@ -37,6 +37,7 @@ public class OrderMapper {
         hotelBookingDto.setHotelRoomId(orderRequest.getHotelDetails().getHotelRoomId());
         hotelBookingDto.setNoOfGuests(Long.parseLong(orderRequest.getHotelDetails().getHotelNumberOfGuests()));
         hotelBookingDto.setRoomType(orderRequest.getHotelDetails().getHotelRoomType().name());
+        hotelBookingDto.setNoOfRooms(orderRequest.getHotelDetails().getNoOfRooms());
         customerDto.setHotelBookingDetails(Arrays.asList(hotelBookingDto));
         customerDto.setEmail(orderRequest.getCustomerDetails().getCustomerEmail());
         customerDto.setName(orderRequest.getCustomerDetails().getCustomerName());

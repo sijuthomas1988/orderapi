@@ -43,6 +43,9 @@ public class HotelBookingDto implements Serializable {
     @Column(name = "number_of_guests")
     private Long noOfGuests;
 
+    @Column(name = "number_of_rooms_booked")
+    private Long NoOfRooms;
+
     @Column(name = "room_type")
     private String roomType;
 

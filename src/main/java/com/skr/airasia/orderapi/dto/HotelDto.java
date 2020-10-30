@@ -1,7 +1,9 @@
 package com.skr.airasia.orderapi.dto;
 
+import com.skr.airasia.orderapi.optimisticlocking.VersionedEntity;
 import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -9,13 +11,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "HOTEL_DETAILS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HotelDto  implements Serializable {
+public class HotelDto  implements Serializable, VersionedEntity {
+
+    private final String TABLE = "HOTEL_DETAILS";
 
     @Id
     @Column(name = "id")
@@ -38,5 +43,13 @@ public class HotelDto  implements Serializable {
 
     @Column(name = "hotel_no_available_rooms")
     private Long noOfRoomsAvailable;
+
+    @Column(name = "version")
+    private Long version;
+
+    @Override
+    public String getTableName() {
+        return TABLE;
+    }
 }
 
