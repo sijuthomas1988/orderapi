@@ -41,6 +41,7 @@ public class OrderController {
     @Timed
     public ResponseEntity<OrderResponse> saveBookingDetails(@RequestBody OrderRequest orderRequest) throws ServiceException {
         OrderResponse orderResponse = this.orderService.insertOrder(orderRequest);
+        log.info(orderResponse.getOrderId());
         return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.CREATED);
     }
 }

@@ -2,6 +2,9 @@ package com.skr.airasia.orderapi.exception;
 
 import lombok.Getter;
 
+/**
+ * Service Exception class
+ */
 public class ServiceException  extends Exception {
 
     /** Status code */

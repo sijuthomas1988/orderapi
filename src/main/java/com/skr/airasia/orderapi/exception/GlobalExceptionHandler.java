@@ -28,15 +28,15 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> serviceExceptionHandler(ServiceException e, WebRequest webRequest) {
         if (e.getCode().equalsIgnoreCase(OrderErrorCode.REPOSITORY_ERROR.getCode())) {
             ErrorDetails errorDetails = new ErrorDetails(new Date(), OrderErrorCode.REPOSITORY_ERROR.getCode(),
-                    OrderErrorCode.REPOSITORY_ERROR.getMessage(), e.getStatus());
+                    OrderErrorCode.REPOSITORY_ERROR.getMessage(), TransactionStatus.valueOf(e.getStatus()));
             return new ResponseEntity<>(errorDetails, HttpStatus.NOT_MODIFIED);
         } else if (e.getCode().equalsIgnoreCase(OrderErrorCode.UNABLE_TO_PROCESS_ORDER.getCode())) {
             ErrorDetails errorDetails = new ErrorDetails(new Date(), OrderErrorCode.UNABLE_TO_PROCESS_ORDER.getCode(),
-                    OrderErrorCode.UNABLE_TO_PROCESS_ORDER.getMessage(), e.getStatus());
+                    OrderErrorCode.UNABLE_TO_PROCESS_ORDER.getMessage(), TransactionStatus.valueOf(e.getStatus()));
             return new ResponseEntity<>(errorDetails, HttpStatus.NOT_MODIFIED);
         } else {
             ErrorDetails errorDetails = new ErrorDetails(new Date(), OrderErrorCode.UNEXPECTED_ERROR.getCode(),
-                    OrderErrorCode.UNEXPECTED_ERROR.getMessage(), TransactionStatus.REJECTED.name());
+                    OrderErrorCode.UNEXPECTED_ERROR.getMessage(), TransactionStatus.REJECTED);
             return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
         }
     }
@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> globalExceptionHandler(Exception e, WebRequest webRequest) {
         ErrorDetails errorDetails = new ErrorDetails(new Date(), OrderErrorCode.INTERNAL_SERVICE_ERROR.getMessage(), OrderErrorCode.INTERNAL_SERVICE_ERROR.getMessage(),
-                TransactionStatus.REJECTED.name());
+                TransactionStatus.REJECTED);
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

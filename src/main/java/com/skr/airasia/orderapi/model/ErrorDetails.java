@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(description = "Response model for error returned")
 public class ErrorDetails {
 
@@ -33,6 +35,6 @@ public class ErrorDetails {
     private String details;
 
     @ApiModelProperty(notes = "transaction status")
-    private String transactionStatus;
+    private TransactionStatus transactionStatus;
 }
 

@@ -1,0 +1,4 @@
+INSERT INTO HOTEL_DETAILS(hotel_id, hotel_name, hotel_room_id, hotel_room_type, hotel_room_name, hotel_no_available_rooms, version) VALUES ('1234_KL_Hilton', 'Hilton_KL', '1234_Standard_Hilton_KL', 'Standard', 'Hilton_KL_Standard', '15', '15');
+INSERT INTO HOTEL_DETAILS(hotel_id, hotel_name, hotel_room_id, hotel_room_type, hotel_room_name, hotel_no_available_rooms, version) VALUES ('1234_KL_Hilton', 'Hilton_KL', '1234_Standard_Hilton_KL', 'Standard', 'Hilton_KL_Standard', '6', '6');
+INSERT INTO HOTEL_DETAILS(hotel_id, hotel_name, hotel_room_id, hotel_room_type, hotel_room_name, hotel_no_available_rooms, version) VALUES ('1234_KL_Hilton', 'Hilton_KL', '1234_Standard_Hilton_KL', 'Standard', 'Hilton_KL_Standard', '0', '0');
+INSERT INTO HOTEL_DETAILS(hotel_id, hotel_name, hotel_room_id, hotel_room_type, hotel_room_name, hotel_no_available_rooms, version) VALUES ('1234_KL_Hilton', 'Hilton_KL', '1234_Standard_Hilton_KL', 'Standard', 'Hilton_KL_Standard', '1', '1');
