@@ -47,6 +47,12 @@ The API endpoint can be found in Swagger documentation.
 There is one endpoint as it is still in development phase. But feel free to try it out.
 1. http://localhost:8080/orderapi/v1/createOrder
 
+* Details
+1. An Order API whose inventory is dependent on the `hotel_details` table created during the start of the application
+2. So When a save order call is being made, it checks for the available rooms, if it is not there, it throws 
+an error details to the caller.
+3. During Concurent calls, an Optimistic Exception is thrown if the user is trying to update the inventory i.e room availablity.
+(Note: It depends on the user, It the user needs to be retried, then a retry logic needs to be written(Consideration for future))
 ## Support & Ownership
 
 Feel free to ask [Sijumon Karyil Raju](sijuthomas1988@gmail.com) if you need some support when there are any questions left or if you need some support.
